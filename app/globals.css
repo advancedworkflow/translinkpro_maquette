@@ -1,0 +1,532 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Palette TransLink-Pro - Thème Rouge Africain */
+:root {
+  /* Couleurs principales */
+  --primary-white: #ffffff;
+  --primary-black: #1a1a1a;
+  --primary-red: #dc2626; /* Rouge principal */
+  
+  /* Couleur confiance (thème rouge) */
+  --trust-red: #dc2626;
+  --trust-red-dark: #b91c1c;
+  --trust-red-light: #ef4444;
+  
+  /* Couleurs secondaires */
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  
+  /* Couleurs d'état */
+  --success-green: #10b981;
+  --warning-orange: #f59e0b;
+  --error-red: #ef4444;
+  --info-blue: #3b82f6;
+}
+
+/* Classes utilitaires TransLink-Pro */
+.bg-primary {
+  background-color: var(--primary-white);
+}
+
+.bg-primary-dark {
+  background-color: var(--primary-black);
+}
+
+.bg-accent {
+  background-color: var(--primary-red);
+}
+
+.bg-trust {
+  background-color: var(--trust-red);
+}
+
+.bg-trust-dark {
+  background-color: var(--trust-red-dark);
+}
+
+.bg-trust-light {
+  background-color: var(--trust-red-light);
+}
+
+.text-primary {
+  color: var(--primary-black);
+}
+
+.text-accent {
+  color: var(--primary-red);
+}
+
+.text-trust {
+  color: var(--trust-red);
+}
+
+.border-trust {
+  border-color: var(--trust-red);
+}
+
+.ring-trust {
+  --tw-ring-color: var(--trust-red);
+}
+
+.hover\:bg-trust-dark:hover {
+  background-color: var(--trust-red-dark);
+}
+
+.hover\:bg-trust-light:hover {
+  background-color: var(--trust-red-light);
+}
+
+/* Styles pour les icônes */
+.icon-trust {
+  background-color: var(--trust-red);
+  color: white;
+}
+
+.icon-accent {
+  background-color: var(--primary-red);
+  color: white;
+}
+
+/* Transitions et animations pour slides */
+.slide-enter {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.slide-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+
+.slide-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-exit-active {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 300ms ease-in, transform 300ms ease-in;
+}
+
+/* Styles pour les cartes KPI (inspirées Samsara) */
+.kpi-card {
+  background: var(--primary-white);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.2s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+}
+
+.kpi-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-black);
+  line-height: 1;
+}
+
+.kpi-label {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  margin-top: 4px;
+}
+
+.kpi-change {
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.kpi-change.positive {
+  color: var(--success-green);
+}
+
+.kpi-change.negative {
+  color: var(--error-red);
+}
+
+/* Styles pour les boutons CTA */
+.btn-primary {
+  background: var(--trust-red);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: var(--trust-red-dark);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--primary-white);
+  color: var(--trust-red);
+  border: 2px solid var(--trust-red);
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: var(--trust-red);
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* Styles pour les modes d'interface */
+.quick-mode {
+  background: var(--gray-50);
+  border: 2px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.pro-mode {
+  background: var(--primary-white);
+  border: 2px solid var(--trust-red);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+/* Styles pour les cartes de dashboard */
+.dashboard-card {
+  background: var(--primary-white);
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Styles pour les indicateurs de progression */
+.progress-bar {
+  background: var(--gray-200);
+  border-radius: 8px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, var(--trust-red), var(--trust-red-light));
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.5s ease;
+}
+
+/* Styles pour la sidebar */
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.sidebar-link-active {
+  background: var(--trust-red);
+  color: white;
+}
+
+.sidebar-link-inactive {
+  color: var(--gray-600);
+}
+
+.sidebar-link-inactive:hover {
+  background: var(--gray-100);
+  color: var(--gray-900);
+}
+
+/* Styles pour les notifications */
+.notification {
+  background: var(--primary-white);
+  border-left: 4px solid var(--trust-red);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.notification.success {
+  border-left-color: var(--success-green);
+}
+
+.notification.warning {
+  border-left-color: var(--warning-orange);
+}
+
+.notification.error {
+  border-left-color: var(--error-red);
+}
+
+/* Responsive et mobile-first */
+@media (max-width: 768px) {
+  .kpi-card {
+    padding: 16px;
+  }
+  
+  .kpi-value {
+    font-size: 1.5rem;
+  }
+  
+  .dashboard-card {
+    padding: 16px;
+  }
+  
+  .btn-primary, .btn-secondary {
+    padding: 10px 20px;
+    font-size: 0.875rem;
+  }
+}
+
+/* Mode offline */
+.offline-indicator {
+  background: var(--warning-orange);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+/* Animations de chargement */
+.loading-skeleton {
+  background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-100) 50%, var(--gray-200) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Boutons trust */
+.btn-trust {
+  background-color: var(--trust-red);
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.btn-trust:hover {
+  background-color: var(--trust-red-dark);
+}
+
+/* Style de bouton principal avec padding et margin spécifiques */
+.btn-primary {
+  padding: 0 40px;
+  margin: 0 16px;
+  line-height: 31px;
+  color: #fff !important;
+  background-color: #106ebe;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.btn-primary:hover {
+  background-color: #0d5ba3;
+}
+
+.btn-primary:focus {
+  outline: none;
+}
+
+/* Focus states trust */
+.focus-trust:focus {
+  --tw-ring-color: var(--trust-red);
+  border-color: var(--trust-red);
+}
+
+/* Navigation active states */
+.nav-active {
+  background-color: var(--trust-red);
+  color: white;
+}
+
+.nav-active-light {
+  background-color: rgba(220, 38, 38, 0.1);
+  color: var(--trust-red);
+}
+
+/* Animations personnalisées */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-2px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+  }
+  50% {
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Classes d'animation */
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.animate-ripple {
+  animation: ripple 0.6s ease-out;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.3s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out;
+}
+
+.animate-bounceIn {
+  animation: bounceIn 0.5s ease-out;
+}
+
+/* Transitions personnalisées */
+.transition-all-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-colors-smooth {
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Effets de focus personnalisés */
+.focus-ring-trust:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: rgba(220, 38, 38, 0.2);
+  border-color: var(--trust-red);
+}
+
+/* Effets de hover personnalisés */
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-glow:hover {
+}

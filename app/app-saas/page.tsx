@@ -1,0 +1,434 @@
+'use client'
+
+import { useState } from 'react'
+import { 
+  UserCheck, 
+  Clock, 
+  Car, 
+  Truck, 
+  ChevronLeft, 
+  ChevronRight,
+  Maximize,
+  UserPlus,
+  List,
+  Eye,
+  Edit,
+  Filter,
+  Grid3X3,
+  TrendingUp,
+  MapPin,
+  Route,
+  Activity,
+  User
+} from 'lucide-react'
+import TruckImage, { DriverAvatar, StatusIndicator } from '../../components/ui/TruckImage'
+import QuickActionModal from '../../components/ui/QuickActionModal'
+
+export default function DashboardPage() {
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [quickActionModal, setQuickActionModal] = useState<{
+    isOpen: boolean
+    action: 'create-driver' | 'create-truck' | 'view-drivers' | 'view-trucks' | 'view-truck' | 'edit-disposition' | null
+  }>({
+    isOpen: false,
+    action: null
+  })
+
+  const stats = [
+    {
+      icon: UserCheck,
+      label: 'Chauffeurs actifs',
+      value: '24',
+      change: '+12%',
+      changeColor: 'text-green-600'
+    },
+    {
+      icon: Clock,
+      label: 'Disponibles',
+      value: '8',
+      change: '+2',
+      changeColor: 'text-green-600'
+    },
+    {
+      icon: Car,
+      label: 'En course',
+      value: '16',
+      change: '+5%',
+      changeColor: 'text-green-600'
+    },
+    {
+      icon: Truck,
+      label: 'Camions total',
+      value: '32',
+      change: '+3',
+      changeColor: 'text-green-600'
+    }
+  ]
+
+  const trucks = [
+    {
+      id: 'T123',
+      model: 'Mercedes Actros',
+      driver: 'Jean-Baptiste Mballa',
+      mileage: '145,230 km',
+      fuel: '75%',
+      status: 'Actif',
+      statusColor: 'bg-green-100 text-green-700'
+    },
+    {
+      id: 'T456',
+      model: 'Volvo FH',
+      driver: 'Marie-Claire Nguema',
+      mileage: '98,450 km',
+      fuel: '92%',
+      status: 'Disponible',
+      statusColor: 'bg-green-100 text-green-700'
+    },
+    {
+      id: 'T789',
+      model: 'Scania R-Series',
+      driver: 'Paul Nkeng',
+      mileage: '87,320 km',
+      fuel: '68%',
+      status: 'Actif',
+      statusColor: 'bg-green-100 text-green-700'
+    }
+  ]
+
+  const activeTrips = [
+    {
+      id: 'TR-001',
+      client: 'Fatou Ndiaye',
+      from: 'Douala',
+      to: 'Yaoundé',
+      distance: '250 km',
+      progress: 85,
+      eta: '45min',
+      status: 'En cours',
+      statusColor: 'bg-green-100 text-green-700'
+    }
+  ]
+
+  const chartData = {
+    weeklyTrips: [
+      { day: 'Lun', trips: 12 },
+      { day: 'Mar', trips: 18 },
+      { day: 'Mer', trips: 15 },
+      { day: 'Jeu', trips: 22 },
+      { day: 'Ven', trips: 19 },
+      { day: 'Sam', trips: 8 },
+      { day: 'Dim', trips: 5 }
+    ],
+    monthlyRevenue: [
+      { month: 'Jan', revenue: 4500000 },
+      { month: 'Fév', revenue: 5200000 },
+      { month: 'Mar', revenue: 4800000 },
+      { month: 'Avr', revenue: 6100000 },
+      { month: 'Mai', revenue: 5800000 },
+      { month: 'Juin', revenue: 6700000 }
+    ]
+  }
+
+  const drivers = [
+    {
+      name: 'Jean-Baptiste Mballa',
+      status: 'Disponible',
+      truck: 'T123 - Mercedes Actros',
+      rating: '4.8',
+      lastTrip: 'Il y a 2h'
+    },
+    {
+      name: 'Marie-Claire Nguema',
+      status: 'En course',
+      truck: 'T456 - Volvo FH',
+      rating: '4.9',
+      lastTrip: 'En cours'
+    },
+    {
+      name: 'Paul Nkeng',
+      status: 'En course',
+      truck: 'T789 - Scania R-Series',
+      rating: '4.6',
+      lastTrip: 'Il y a 1h'
+    }
+  ]
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % Math.ceil(trucks.length / 2))
+  }
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + Math.ceil(trucks.length / 2)) % Math.ceil(trucks.length / 2))
+  }
+
+  const openQuickAction = (action: typeof quickActionModal.action) => {
+    setQuickActionModal({ isOpen: true, action })
+  }
+
+  const closeQuickAction = () => {
+    setQuickActionModal({ isOpen: false, action: null })
+  }
+
+  return (
+    <div className="p-6">
+      {/* Stats Section */}
+      <div className="grid grid-cols-4 gap-6 mb-8">
+        {stats.map((stat, index) => (
+          <div key={index} className="kpi-card">
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="kpi-label">{stat.label}</div>
+                <div className="kpi-value text-trust">{stat.value}</div>
+                <div className={`text-xs ${stat.changeColor} mt-1`}>{stat.change}</div>
+              </div>
+              <div className="icon-trust p-3 rounded-lg">
+                <stat.icon className="w-5 h-5" />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Fleet Status Section */}
+      <div className="dashboard-card mb-8">
+          <div className="flex items-center justify-between mb-6">
+          <h2 className="text-lg font-light text-gray-900">Statut de la flotte</h2>
+          <div className="flex items-center space-x-2">
+              <button 
+                onClick={prevSlide}
+              className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100"
+              >
+              <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button 
+                onClick={nextSlide}
+              className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100"
+              >
+              <ChevronRight className="w-5 h-5" />
+              </button>
+          </div>
+        </div>
+
+          <div className="relative overflow-hidden">
+            <div 
+              className="flex transition-transform duration-300 ease-in-out"
+              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+            >
+              {trucks.map((truck, index) => (
+              <div key={index} className="min-w-80 bg-white border border-gray-200 rounded-lg p-4 mr-4 shadow-sm">
+                <div className="flex items-start space-x-4">
+                  {/* Image du camion à gauche */}
+                  <div className="flex-shrink-0">
+                    <TruckImage 
+                      truckId={truck.id} 
+                      model={truck.model} 
+                      size="md" 
+                      className="w-16 h-16"
+                    />
+                      </div>
+                  
+                  {/* Informations à droite */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between mb-2">
+                      <div>
+                        <h3 className="text-sm font-semibold text-gray-900">Camion #{truck.id}</h3>
+                        <p className="text-xs text-gray-500">{truck.model}</p>
+                      </div>
+                      <StatusIndicator status={truck.status} size="sm" />
+                    </div>
+                    
+                  <div className="space-y-2 text-xs">
+                      <div className="flex justify-between items-center">
+                      <span className="text-gray-500">Chauffeur:</span>
+                        <div className="flex items-center">
+                          <DriverAvatar name={truck.driver} size="xs" className="mr-2" />
+                          <span className="text-gray-900 font-medium">{truck.driver}</span>
+                        </div>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">Kilométrage:</span>
+                        <span className="text-gray-900 font-medium">{truck.mileage}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">Carburant:</span>
+                        <span className="text-gray-900 font-medium">{truck.fuel}</span>
+                      </div>
+                    </div>
+                    </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Content Grid */}
+      <div className="grid grid-cols-3 gap-8">
+        {/* Map Section */}
+        <div className="col-span-2">
+          <div className="dashboard-card">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-lg font-light text-gray-900">Carte en temps réel</h2>
+              <button className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+                <Maximize className="w-5 h-5" />
+                </button>
+            </div>
+            
+            <div className="bg-gray-100 rounded-lg h-64 flex items-center justify-center">
+              <div className="text-center text-gray-500">
+                <MapPin className="w-12 h-12 mx-auto mb-2" />
+                <p>Carte interactive</p>
+              </div>
+            </div>
+          </div>
+            </div>
+
+        {/* Actions Section */}
+            <div>
+          <div className="bg-white border border-gray-200 rounded p-6 mb-6">
+            <h2 className="text-lg font-light text-gray-900 mb-4">Actions rapides</h2>
+            
+            <div className="space-y-3">
+              <button 
+                onClick={() => openQuickAction('create-driver')}
+                className="w-full border border-gray-300 text-gray-900 p-3 rounded text-sm hover:bg-gray-50 transition-colors flex items-center"
+              >
+                <UserPlus className="w-4 h-4 mr-3" />
+                Créer chauffeur
+              </button>
+              
+              <button 
+                onClick={() => openQuickAction('create-truck')}
+                className="w-full border border-gray-300 text-gray-900 p-3 rounded text-sm hover:bg-gray-50 transition-colors flex items-center"
+              >
+                <Truck className="w-4 h-4 mr-3" />
+                Ajouter camion
+              </button>
+              
+              <button 
+                onClick={() => openQuickAction('view-drivers')}
+                className="w-full border border-gray-300 text-gray-900 p-3 rounded text-sm hover:bg-gray-50 transition-colors flex items-center"
+              >
+                <List className="w-4 h-4 mr-3" />
+                Liste des chauffeurs
+              </button>
+              
+              <button 
+                onClick={() => openQuickAction('view-trucks')}
+                className="w-full border border-gray-300 text-gray-900 p-3 rounded text-sm hover:bg-gray-50 transition-colors flex items-center"
+              >
+                <Truck className="w-4 h-4 mr-3" />
+                Liste des camions
+              </button>
+              
+              <button 
+                onClick={() => openQuickAction('view-truck')}
+                className="w-full border border-gray-300 text-gray-900 p-3 rounded text-sm hover:bg-gray-50 transition-colors flex items-center"
+              >
+                <Eye className="w-4 h-4 mr-3" />
+                Voir camion
+              </button>
+              
+              <button 
+                onClick={() => openQuickAction('edit-disposition')}
+                className="w-full border border-gray-300 text-gray-900 p-3 rounded text-sm hover:bg-gray-50 transition-colors flex items-center"
+              >
+                <Edit className="w-4 h-4 mr-3" />
+                Modifier disposition
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Drivers Table */}
+      <div className="dashboard-card">
+          <div className="flex items-center justify-between mb-6">
+          <h2 className="text-lg font-light text-gray-900">Chauffeurs actifs</h2>
+          <div className="flex items-center space-x-3">
+            <button className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+              <Filter className="w-5 h-5" />
+              </button>
+            <button className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+              <Grid3X3 className="w-5 h-5" />
+              </button>
+            </div>
+            </div>
+          
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-white border-b border-gray-200">
+              <tr>
+                <th className="px-4 py-3 text-left">
+                      <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      className="h-4 w-4 text-trust focus:ring-trust border-gray-300 rounded"
+                    />
+                    <span className="ml-2 text-sm font-medium text-gray-900">Chauffeur</span>
+                  </div>
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-900">Véhicule</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-900">Note</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-900">Dernier trajet</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-900">Statut</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-900">Action</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-100">
+              {drivers.map((driver, index) => (
+                <tr key={index} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-4 py-4 whitespace-nowrap">
+                    <div className="flex items-center">
+                      <input
+                        type="checkbox"
+                        className="h-4 w-4 text-trust focus:ring-trust border-gray-300 rounded"
+                      />
+                      <DriverAvatar name={driver.name} size="sm" className="ml-3 mr-3" />
+                      <div>
+                        <div className="text-sm font-medium text-gray-900">{driver.name}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {driver.truck}
+                  </td>
+                  <td className="px-4 py-4 whitespace-nowrap">
+                    <div className="flex items-center">
+                      <span className="text-sm text-gray-900">{driver.rating}</span>
+                      <span className="ml-1 text-yellow-400">★</span>
+                    </div>
+                  </td>
+                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {driver.lastTrip}
+                    </td>
+                    <td className="py-4">
+                      <span className={`text-xs px-2 py-1 rounded ${
+                        driver.status === 'En course' ? 'bg-green-100 text-green-700' :
+                      driver.status === 'Disponible' ? 'bg-green-100 text-green-700' :
+                        'bg-yellow-100 text-yellow-700'
+                      }`}>
+                        {driver.status}
+                      </span>
+                    </td>
+                  <td className="px-4 py-4 whitespace-nowrap">
+                    <button className="text-sm text-trust hover:text-trust-dark bg-trust/10 hover:bg-trust/20 px-3 py-1 rounded transition-colors">
+                        Voir détails
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            </div>
+        </div>
+
+      {/* Quick Action Modal */}
+      <QuickActionModal
+        isOpen={quickActionModal.isOpen}
+        onClose={closeQuickAction}
+        action={quickActionModal.action}
+      />
+    </div>
+  )
+}

@@ -1,0 +1,147 @@
+/* Styles pour Leaflet */
+@import 'leaflet/dist/leaflet.css';
+
+/* Personnalisation des icônes de camions */
+.custom-truck-icon {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Styles pour les popups */
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.leaflet-popup-content {
+  margin: 0;
+  padding: 0;
+}
+
+.leaflet-popup-tip {
+  background: white;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles pour les contrôles de la carte */
+.leaflet-control-zoom a {
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  font-weight: bold;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: #f9fafb;
+  border-color: #d1d5db;
+}
+
+/* Styles pour les marqueurs */
+.leaflet-marker-icon {
+  transition: transform 0.2s ease;
+}
+
+.leaflet-marker-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Styles pour les polylines (routes) */
+.leaflet-interactive {
+  transition: opacity 0.2s ease;
+}
+
+.leaflet-interactive:hover {
+  opacity: 0.8;
+}
+
+/* Styles pour la légende */
+.map-legend {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  font-size: 12px;
+}
+
+.map-legend h4 {
+  margin: 0 0 8px 0;
+  font-weight: 600;
+  color: #111827;
+}
+
+.map-legend .legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.map-legend .legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles pour les contrôles personnalisés */
+.map-controls {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+}
+
+.map-controls button {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.map-controls button:hover {
+  background-color: #f3f4f6;
+}
+
+/* Animation pour le chargement */
+.map-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #f9fafb;
+}
+
+.map-loading .spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e5e7eb;
+  border-top: 3px solid #106ebe;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .map-legend {
+    font-size: 11px;
+    padding: 8px;
+  }
+  
+  .map-controls {
+    padding: 6px;
+  }
+  
+  .map-controls button {
+    padding: 6px;
+  }
+}
