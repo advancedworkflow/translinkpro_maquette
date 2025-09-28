@@ -241,7 +241,7 @@ export default function DashboardPage() {
                       <div className="flex justify-between items-center">
                       <span className="text-gray-500">Chauffeur:</span>
                         <div className="flex items-center">
-                          <DriverAvatar name={truck.driver} size="xs" className="mr-2" />
+                          <DriverAvatar name={truck.driver} size="sm" className="mr-2" />
                           <span className="text-gray-900 font-medium">{truck.driver}</span>
                         </div>
                     </div>
