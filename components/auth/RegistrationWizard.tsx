@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ChevronLeft, ChevronRight, Check, User, Store, Truck } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Check, User as UserIcon, Store, Truck } from 'lucide-react'
 import { AuthService } from '../../lib/auth'
 import { User, ClientProfile, PrestataireProfile, TransporteurProfile } from '../../lib/types'
 import ClientRegistrationSlide from './slides/ClientRegistrationSlide'
@@ -36,21 +36,21 @@ export default function RegistrationWizard({ onComplete }: RegistrationWizardPro
       id: 0,
       title: 'Type de compte',
       description: 'Choisissez votre type de compte',
-      icon: User,
+      icon: UserIcon,
       component: UserTypeSelection
     },
     {
       id: 1,
       title: 'Informations de base',
       description: 'Vos informations personnelles',
-      icon: User,
+      icon: UserIcon,
       component: BasicInfoSlide
     },
     {
       id: 2,
       title: 'Configuration du profil',
       description: 'Configuration spécifique à votre type de compte',
-      icon: selectedUserType === 'client' ? User : selectedUserType === 'prestataire' ? Store : Truck,
+      icon: selectedUserType === 'client' ? UserIcon : selectedUserType === 'prestataire' ? Store : Truck,
       component: selectedUserType === 'client' ? ClientRegistrationSlide : 
                  selectedUserType === 'prestataire' ? PrestataireRegistrationSlide : 
                  TransporteurRegistrationSlide
@@ -188,7 +188,7 @@ export default function RegistrationWizard({ onComplete }: RegistrationWizardPro
       })
 
       if (user) {
-        onComplete?.(user)
+        onComplete?.(user as any)
         
         // Rediriger selon le type d'utilisateur
         switch (user.type) {
@@ -338,7 +338,7 @@ function UserTypeSelection({ onUserTypeSelect }: { onUserTypeSelect: (type: User
       type: 'client' as const,
       title: 'Client',
       description: 'Demandeur de transport',
-      icon: User,
+      icon: UserIcon,
       features: ['Créer des demandes', 'Suivi temps réel', 'Comparaison offres', 'Historique courses'],
       color: 'bg-blue-50 border-trust hover:border-trust-dark hover:bg-blue-100'
     },
