@@ -517,7 +517,7 @@ export default function CoursesPage() {
                   <td className="px-4 py-4 whitespace-nowrap">
                     {request.driver ? (
                       <div className="flex items-center">
-                        <TruckImage truckId={request.vehicle} size="xs" className="mr-2" />
+                        <TruckImage truckId={request.vehicle || 'default'} size="xs" className="mr-2" />
                         <div>
                           <div className="text-sm font-medium text-gray-900">{request.driver}</div>
                           <div className="text-xs text-gray-500">{request.vehicle}</div>

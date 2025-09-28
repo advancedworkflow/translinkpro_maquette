@@ -1,16 +1,16 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Wifi, WifiOff, Sync, CheckCircle, AlertCircle } from 'lucide-react'
+import { Wifi, WifiOff, RefreshCw, CheckCircle, AlertCircle } from 'lucide-react'
 
-interface OfflineSyncProps {
-  onSyncComplete?: () => void
+interface OfflineRefreshCwProps {
+  onRefreshCwComplete?: () => void
 }
 
-export default function OfflineSync({ onSyncComplete }: OfflineSyncProps) {
+export default function OfflineRefreshCw({ onRefreshCwComplete }: OfflineRefreshCwProps) {
   const [isOnline, setIsOnline] = useState(true)
-  const [pendingSync, setPendingSync] = useState(false)
-  const [syncStatus, setSyncStatus] = useState<'idle' | 'syncing' | 'success' | 'error'>('idle')
+  const [pendingRefreshCw, setPendingRefreshCw] = useState(false)
+  const [syncStatus, setRefreshCwStatus] = useState<'idle' | 'syncing' | 'success' | 'error'>('idle')
   const [pendingData, setPendingData] = useState<any[]>([])
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function OfflineSync({ onSyncComplete }: OfflineSyncProps) {
     const handleOnline = () => {
       setIsOnline(true)
       if (pendingData.length > 0) {
-        handleSync()
+        handleRefreshCw()
       }
     }
 
@@ -38,33 +38,33 @@ export default function OfflineSync({ onSyncComplete }: OfflineSyncProps) {
     }
   }, [pendingData.length])
 
-  const handleSync = async () => {
+  const handleRefreshCw = async () => {
     if (!isOnline || pendingData.length === 0) return
 
-    setSyncStatus('syncing')
-    setPendingSync(true)
+    setRefreshCwStatus('syncing')
+    setPendingRefreshCw(true)
 
     try {
       // Simuler la synchronisation
       await new Promise(resolve => setTimeout(resolve, 2000))
       
       // Ici, vous enverriez les données au serveur
-      console.log('Synchronisation des données:', pendingData)
+      console.log('RefreshCwhronisation des données:', pendingData)
       
-      setSyncStatus('success')
+      setRefreshCwStatus('success')
       setPendingData([])
-      onSyncComplete?.()
+      onRefreshCwComplete?.()
       
       // Réinitialiser après 3 secondes
       setTimeout(() => {
-        setSyncStatus('idle')
-        setPendingSync(false)
+        setRefreshCwStatus('idle')
+        setPendingRefreshCw(false)
       }, 3000)
     } catch (error) {
-      setSyncStatus('error')
+      setRefreshCwStatus('error')
       setTimeout(() => {
-        setSyncStatus('idle')
-        setPendingSync(false)
+        setRefreshCwStatus('idle')
+        setPendingRefreshCw(false)
       }, 3000)
     }
   }
@@ -90,15 +90,15 @@ export default function OfflineSync({ onSyncComplete }: OfflineSyncProps) {
         <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-4 max-w-sm">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center space-x-2">
-              <Sync className={`w-4 h-4 ${
+              <RefreshCw className={`w-4 h-4 ${
                 syncStatus === 'syncing' ? 'animate-spin text-trust' :
                 syncStatus === 'success' ? 'text-green-500' :
                 syncStatus === 'error' ? 'text-red-500' :
                 'text-gray-400'
               }`} />
               <span className="text-sm font-medium text-gray-900">
-                {syncStatus === 'syncing' ? 'Synchronisation...' :
-                 syncStatus === 'success' ? 'Synchronisé' :
+                {syncStatus === 'syncing' ? 'RefreshCwhronisation...' :
+                 syncStatus === 'success' ? 'RefreshCwhronisé' :
                  syncStatus === 'error' ? 'Erreur de sync' :
                  'Données en attente'}
               </span>
@@ -113,10 +113,10 @@ export default function OfflineSync({ onSyncComplete }: OfflineSyncProps) {
           
           {syncStatus === 'idle' && (
             <button
-              onClick={handleSync}
+              onClick={handleRefreshCw}
               className="w-full btn-primary text-sm py-2"
             >
-              Synchroniser maintenant
+              RefreshCwhroniser maintenant
             </button>
           )}
           
@@ -134,7 +134,7 @@ export default function OfflineSync({ onSyncComplete }: OfflineSyncProps) {
 }
 
 // Hook pour gérer les données hors ligne
-export function useOfflineSync() {
+export function useOfflineRefreshCw() {
   const [isOnline, setIsOnline] = useState(true)
   const [pendingData, setPendingData] = useState<any[]>([])
 
