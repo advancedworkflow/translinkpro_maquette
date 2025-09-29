@@ -263,7 +263,10 @@ export default function TruckDetailsPage() {
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-medium text-gray-900 capitalize">{docType}</h4>
                     <div className={`flex items-center ${status.color}`}>
-                      <status.icon className="w-4 h-4 mr-1" />
+                      {(() => {
+                        const StatusIcon = status.icon;
+                        return <StatusIcon className="w-4 h-4 mr-1" />;
+                      })()}
                       <span className="text-xs">{status.text}</span>
                     </div>
                   </div>

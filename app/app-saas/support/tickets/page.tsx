@@ -169,7 +169,10 @@ export default function TicketsPage() {
               <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
                 getStatusInfo(status.value).bgColor
               }`}>
-                <status.icon className={`w-6 h-6 ${getStatusInfo(status.value).color}`} />
+                {(() => {
+                  const StatusIcon = getStatusInfo(status.value).icon;
+                  return <StatusIcon className={`w-6 h-6 ${getStatusInfo(status.value).color}`} />;
+                })()}
               </div>
             </div>
           </div>
