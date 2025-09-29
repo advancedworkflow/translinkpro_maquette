@@ -21,7 +21,7 @@ export default function BigMapPage() {
       speed: '65 km/h',
       fuel: '75%',
       lastUpdate: 'Il y a 2 min',
-      coordinates: [4.0483, 9.7043], // Douala
+      coordinates: [4.0483, 9.7043] as [number, number], // Douala
       destination: 'Yaoundé',
       eta: '2h 15min'
     },
@@ -34,7 +34,7 @@ export default function BigMapPage() {
       speed: '0 km/h',
       fuel: '92%',
       lastUpdate: 'Il y a 5 min',
-      coordinates: [5.4737, 10.4171], // Bafoussam
+      coordinates: [5.4737, 10.4171] as [number, number], // Bafoussam
       destination: 'Garoua',
       eta: '4h 30min'
     },
@@ -47,7 +47,7 @@ export default function BigMapPage() {
       speed: '0 km/h',
       fuel: '45%',
       lastUpdate: 'Il y a 1h',
-      coordinates: [4.5833, 14.0833], // Bertoua
+      coordinates: [4.5833, 14.0833] as [number, number], // Bertoua
       destination: 'Maroua',
       eta: '6h 45min'
     },
@@ -60,7 +60,7 @@ export default function BigMapPage() {
       speed: '55 km/h',
       fuel: '68%',
       lastUpdate: 'Il y a 1 min',
-      coordinates: [3.8480, 11.5021], // Yaoundé
+      coordinates: [3.8480, 11.5021] as [number, number], // Yaoundé
       destination: 'Douala',
       eta: '3h 20min'
     }
