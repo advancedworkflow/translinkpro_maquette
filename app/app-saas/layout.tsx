@@ -178,7 +178,7 @@ export default function SaasLayout({
                             onClick={() => !sidebarCollapsed && toggleExpanded(item.name)}
                             className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
                               hasActiveChild(item.children)
-                                ? 'text-gray-900 bg-trust text-white'
+                                ? 'bg-trust text-white'
                                 : 'text-gray-600 hover:bg-gray-200 hover:text-gray-900'
                             }`}
                           >
@@ -210,7 +210,7 @@ export default function SaasLayout({
                                     href={child.href}
                                     className={`flex items-center px-4 py-2 text-sm rounded-lg transition-colors ${
                                       isActive(child.href)
-                                        ? 'text-gray-900 bg-trust text-white'
+                                        ? 'bg-trust text-white'
                                         : 'text-gray-600 hover:bg-gray-200 hover:text-gray-900'
                                     }`}
                                   >
@@ -229,7 +229,7 @@ export default function SaasLayout({
                           href={item.href}
                           className={`flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
                             isActive(item.href)
-                              ? 'text-gray-900 bg-trust text-white'
+                              ? 'bg-trust text-white'
                               : 'text-gray-600 hover:bg-gray-200 hover:text-gray-900'
                           }`}
                         >

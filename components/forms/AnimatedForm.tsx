@@ -5,7 +5,7 @@ import AnimatedInput from './AnimatedInput'
 import AnimatedButton from './AnimatedButton'
 import AnimatedSelect from './AnimatedSelect'
 import AnimatedTextarea from './AnimatedTextarea'
-import { User, Mail, Phone, MapPin, Calendar, FileText, Camera, Shield } from 'lucide-react'
+import { User, Mail, Phone, MapPin, Calendar, FileText, Camera, Shield, CheckCircle, AlertCircle } from 'lucide-react'
 
 interface FormData {
   firstName: string
@@ -252,7 +252,7 @@ export default function AnimatedForm({ onSubmit, initialData, className = '' }: 
           
           <AnimatedInput
             label="Date de naissance"
-            type="date"
+            type="text"
             value={formData.birthDate}
             onChange={(value) => handleInputChange('birthDate', value)}
             icon={<Calendar className="w-4 h-4" />}

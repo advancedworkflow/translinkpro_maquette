@@ -187,15 +187,15 @@ export default function RealTimeMap({ trucks, selectedTruck, onTruckSelect, clas
   // Routes simulées entre les villes
   const routes = [
     {
-      coordinates: [[4.0483, 9.7043], [3.8480, 11.5021]], // Douala -> Yaoundé
+      coordinates: [[4.0483, 9.7043], [3.8480, 11.5021]] as [number, number][], // Douala -> Yaoundé
       color: '#3b82f6'
     },
     {
-      coordinates: [[5.4737, 10.4171], [9.3077, 13.5847]], // Bafoussam -> Garoua
+      coordinates: [[5.4737, 10.4171], [9.3077, 13.5847]] as [number, number][], // Bafoussam -> Garoua
       color: '#10b981'
     },
     {
-      coordinates: [[4.5833, 14.0833], [10.3333, 14.1667]], // Bertoua -> Maroua
+      coordinates: [[4.5833, 14.0833], [10.3333, 14.1667]] as [number, number][], // Bertoua -> Maroua
       color: '#f59e0b'
     }
   ]

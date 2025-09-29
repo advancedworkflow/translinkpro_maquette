@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Check, Truck, Building, Globe, Star, Zap } from 'lucide-react'
+import { Check, Truck, Building, Globe, Star, Zap, ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface PackSelectionSlideProps {
   formData: any

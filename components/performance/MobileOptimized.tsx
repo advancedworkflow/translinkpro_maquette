@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { 
   Smartphone, 
   Wifi, 
@@ -46,16 +46,16 @@ function MobileOptimizedComponent({ children, fallback }: MobileOptimizedProps) 
     const detectLowEndDevice = () => {
       const isLowEnd = 
         navigator.hardwareConcurrency <= 2 ||
-        navigator.deviceMemory <= 2 ||
+        (navigator as any).deviceMemory <= 2 ||
         window.innerWidth <= 768
       setIsLowEndDevice(isLowEnd)
     }
 
     // Mesurer les performances
     const measurePerformance = () => {
-      if ('performance' in window && performance.getEntriesByType) {
+      if ('performance' in window && (performance as any).getEntriesByType) {
         try {
-          const navigationEntries = performance.getEntriesByType('navigation')
+          const navigationEntries = (performance as any).getEntriesByType('navigation')
           if (navigationEntries.length > 0) {
             const navigation = navigationEntries[0] as PerformanceNavigationTiming
             const metrics: PerformanceMetrics = {
@@ -380,7 +380,7 @@ export function usePerformanceOptimization() {
       try {
         const isLowEnd = 
           (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) ||
-          (navigator.deviceMemory && navigator.deviceMemory <= 2) ||
+          ((navigator as any).deviceMemory && (navigator as any).deviceMemory <= 2) ||
           window.innerWidth <= 768
         setIsLowEndDevice(isLowEnd)
       } catch (error) {

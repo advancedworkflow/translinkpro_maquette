@@ -162,7 +162,7 @@ export function StatusIndicator({
     }
   }
 
-  const config = statusConfig[status] || statusConfig.inactive
+  const config = statusConfig[status as keyof typeof statusConfig] || statusConfig.inactive
   const sizeClass = size === 'sm' ? 'text-xs px-2 py-1' : 'text-sm px-3 py-1'
 
   return (
